@@ -30,16 +30,23 @@ class Bussdriver(Personal):
         else:
             return "Buss in mintcondition"
 
-    # måste få med bussdriver i rapporten till trafikledningen
+    # måste få med bussdriver i rapporten till trafikledningen och måste få med vilken avgång + linje i tidtabellen som är berörd
     def report_accident(self, type, time):
         self.type_of_accident = type
         self.time = int(time)
         time = time + 2
 
-        return type, time
+        driver = Bussdriver.printname(self)
+        return driver, type, time
 
 class Buss():
-    def __init__(self, driver): pass
+    def __init__(self, driver, condition):
+        self.driver = driver
+        self.condition = condition
+
+    def __str__(self):
+
+        return f"{self.driver} {self.condition}"
 
 class Report():
     pass
@@ -56,11 +63,11 @@ class Cleaner(Personal):
 
 def main():
     buss1 = Bussdriver("Victor", "Sandin")
-    print(Bussdriver.report_on_site(buss1, "OK"))
+    report1 = Bussdriver.report_on_site(buss1, "OK")
     print(Bussdriver.report_buss_condition(buss1, "2"))
     print(Bussdriver.report_accident(buss1, "A tree blocking the road", 30))
-    print(Bussdriver.printname(buss1))
-    print(Bussdriver.__str__(buss1))
+    bussid = Buss(buss1, report1)
+    print(bussid)
 
 
 
