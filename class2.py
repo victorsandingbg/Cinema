@@ -86,8 +86,19 @@ class Cleaner(Personal):
         super().__init__(first, last)
 
 
-class Busslines:
+class BussLinesCollection:
+    def __init__(self):
+        with open("busslinje.txt", "r") as f:
+            obs = f.readlines()
 
+            self.linje = []
+            for d in obs:
+                self.linje.append(d)
+
+    def get_bussline_by_id(self, id):
+            return self.linje[id]
+
+class Busslines:
     def __init__(self):
         self.all_lines = []  # BussLine
 
@@ -97,17 +108,15 @@ class Busslines:
             content = [x.strip() for x in content]
             print(content)
 
+    def add_line(self, line):
+        self.all_lines.append(line)
+        print(self)
+
         # läs in en linje från filen
         # skapa alla hållplatser för denna linje
         # för varje hållplats anropa add_stop för denna linje
         # När linjen är färdigskapad anropa add_line och skicka med denna linje
         # stäng filen när klar
-
-    def add_line(self, line):
-        self.all_lines.append(line)
-        print(self)
-
-
 """
 class Bussline: 
     def __init__(self):
@@ -131,17 +140,18 @@ class Buss:
 class Linjemenu:
     def __init__(self):
         self.choices = {
-            "1": Busslines,
-            "2": Busslines,
-            "3": Busslines,
+            "1": BussLinesCollection().get_bussline_by_id(0),
+            "2": BussLinesCollection().get_bussline_by_id(1),
+            "3": BussLinesCollection().get_bussline_by_id(2),
         }
 
     def display_linjemenu(self):
         print(f"""
-        Choose line
-        1. Busslinje 541 | Göteborg Centralstationen - Uddevalla Kampenhof
-        2. Busslinje 121 | Partille Centrum - Nordstan
-        3. Busslinje 95  | Kungsbacka Station - Göteborg Centralstation
+BussLinjer
+** ** ** ** ** ** ** ** ** ** ** **
+1.{BussLinesCollection().get_bussline_by_id(0)}
+2.{BussLinesCollection().get_bussline_by_id(1)}
+3.{BussLinesCollection().get_bussline_by_id(2)}
         """)
 
     def run(self):
@@ -150,20 +160,21 @@ class Linjemenu:
             choice = input("Enter an option: ")
             action = self.choices.get(choice)
             if action:
-                action()
+                print("Vald rutt:", action)
+
             else:
                 print("is not an option".format(choice))
 
-class Drivermenu:
 
+class Drivermenu:
     def __init__(self):
         self.choices = {
             "1": BussDriverCollection().get_driver_by_id(0),
             "2": BussDriverCollection().get_driver_by_id(1),
             "3": BussDriverCollection().get_driver_by_id(2),
-            "4": BussDriverCollection().get_driver_by_id(3)
+            "4": BussDriverCollection().get_driver_by_id(3),
+            "5": BussDriverCollection().get_driver_by_id(4)
         }
-
     def display_driver(self):
         print(f"""
 BussChaffisar
@@ -181,7 +192,7 @@ BussChaffisar
             choice = input("Enter an option: ")
             action = self.choices.get(choice)
             if action:
-                action()
+                print(f"""Choice of driver: {Bussdriver.printname(action)}""")
             else:
                 print("is not an option".format(choice))
 class Menu:
@@ -209,7 +220,6 @@ class Menu:
                 print("{0} is not a valid choice".format(choice))
 
     def company(self):
-
         password = input("Please insert password")
         if password == "dog":
             Drivermenu().run()
