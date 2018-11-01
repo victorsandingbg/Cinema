@@ -6,12 +6,11 @@ class Personal():
 
 class Bussdriver(Personal):
     def __init__(self, first, last, report=None):
+        super().__init__(first, last)
         self.report = report
 
-        super().__init__(first, last)
-
     def __str__(self):
-        return f"{self.first} {self.last}"
+        return f"{self.first}, {self.last}"
 
     def printname(self):
         return f"{self.first} {self.last}"
@@ -30,26 +29,29 @@ class Bussdriver(Personal):
         else:
             return "Buss in mintcondition"
 
-    # måste få med bussdriver i rapporten till trafikledningen och måste få med vilken avgång + linje i tidtabellen som är berörd
-    def report_accident(self, type, time):
+
+    def report_accident(self, type, time, driver):
         self.type_of_accident = type
         self.time = int(time)
         time = time + 2
 
-        driver = Bussdriver.printname(self)
-        return driver, type, time
+        return type, time, driver
 
-class Buss():
+class Traffikledning():
+    def __init__(self, accidentrapport):
+        self.accidentrapport = accidentrapport
+
+    def __str__(self):
+        return f"{self.accidentrapport}"
+
+
+class Report():
     def __init__(self, driver, condition):
         self.driver = driver
         self.condition = condition
 
     def __str__(self):
-
         return f"{self.driver} {self.condition}"
-
-class Report():
-    pass
 
 
 class Mechanic(Personal):
@@ -63,11 +65,16 @@ class Cleaner(Personal):
 
 def main():
     buss1 = Bussdriver("Victor", "Sandin")
-    report1 = Bussdriver.report_on_site(buss1, "OK")
-    print(Bussdriver.report_buss_condition(buss1, "2"))
-    print(Bussdriver.report_accident(buss1, "A tree blocking the road", 30))
-    bussid = Buss(buss1, report1)
-    print(bussid)
+    driver1 = buss1.printname()
+    accident1 = Bussdriver.report_accident(buss1, "Trafficjam", 30, driver1)
+    print(Traffikledning(accident1))
+    ontimereport1 = (Bussdriver.report_on_site(buss1, "OK"))
+    print(Traffikledning(ontimereport1))
+
+
+
+
+
 
 
 
