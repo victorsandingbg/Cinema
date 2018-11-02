@@ -4,7 +4,6 @@ class Personal:
         self.first = first
         self.last = last
 
-
         # Hämtar busschaufförer från ett txt dokument och pekar på rätt rad i txt dokumentet.
 class BussDriverCollection:
     def __init__(self):
@@ -228,6 +227,29 @@ class Menu:
 
     def consumer(self):
         Linjemenu().run()
+
+class Timetable:
+    def __init__(self, timetable):
+        self.timetable = timetable
+        timetable = int(timetable)
+
+        if timetable == 1:
+            for line in open("tables_541.txt", "r"):
+                data = line.split(";")
+                print("Departure:", data[0],"Arrival:", data[1], end="")
+
+        elif timetable == 2:
+            for line in open("tables_121.txt", "r"):
+                data = line.split(";")
+                print("Departure:", data[0], "Arrival:", data[1], end="")
+
+        elif timetable == 3:
+            for line in open("tables_95.txt", "r"):
+                data = line.split(";")
+                print("Departure:", data[0], "Arrival:", data[1], end="")
+        else:
+            print("Invalid, skithög")
+
 
 def main():
     Menu().run()
