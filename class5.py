@@ -5,12 +5,15 @@ class Personal:
         self.last = last
 
         # Hämtar busschaufförer från ett txt dokument och pekar på rätt rad i txt dokumentet.
+
+
 class BussDriverCollection:
     def __init__(self):
         with open("busschaffis.txt", "r") as f:
-            obs = f.readlines()
 
+            obs = f.readlines()
             self.drivers = []
+
             for d in obs:
                 first, last = d.split()
                 driver = Bussdriver(first, last)
@@ -66,15 +69,6 @@ class Traffikledning:
         return f"{self.accidentrapport}"
 
 
-class Report:
-    def __init__(self, driver, condition):
-        self.driver = driver
-        self.condition = condition
-
-    def __str__(self):
-        return f"{self.driver} {self.condition}"
-
-
 class Mechanic(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
@@ -83,6 +77,8 @@ class Mechanic(Personal):
 class Cleaner(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
+
+#########################################################################################
 
 
 class BussLinesCollection:
@@ -96,20 +92,6 @@ class BussLinesCollection:
 
     def get_bussline_by_id(self, id):
             return self.linje[id]
-
-class Busslines:
-    def __init__(self):
-        self.all_lines = []  # BussLine
-
-    def read_all_lines(self):
-        with open("hallplats.txt") as f:
-            content = f.readlines(1)
-            content = [x.strip() for x in content]
-            print(content)
-
-    def add_line(self, line):
-        self.all_lines.append(line)
-        print(self)
 
         # läs in en linje från filen
         # skapa alla hållplatser för denna linje
@@ -164,11 +146,45 @@ BussLinjer
             else:
                 print("is not an option".format(choice))
 
+"""
+class TrafficMenu:
+    def __init__(self):
+        self.choices = {
+
+            "2": BussDriverCollection().get_driver_by_id(1),
+                    "3": BussDriverCollection().get_driver_by_id(2),
+                    "4": BussDriverCollection().get_driver_by_id(3),
+                    "5": BussDriverCollection().get_driver_by_id(4)
+                }
+
+            def display_driver(self):
+                print(f
+Trafikcentral menyn
+************************
+1.{BussDriverCollection().get_driver_by_id(0)}
+2.{BussDriverCollection().get_driver_by_id(1)}
+3.{BussDriverCollection().get_driver_by_id(2)}
+4.{BussDriverCollection().get_driver_by_id(3)}
+5.{BussDriverCollection().get_driver_by_id(4)}
+        )
+
+            def run(self):
+                while True:
+                    self.display_driver()
+                    choice = input("Enter an option: ")
+                    action = self.choices.get(choice)
+                    if action:
+                        print(fChoice of driver: {Bussdriver.printname(action)})
+                    else:
+                        print("is not an option".format(choice))
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+"""
+
 
 class Drivermenu:
     def __init__(self):
         self.choices = {
-            "1": BussDriverCollection().get_driver_by_id(0),
+
             "2": BussDriverCollection().get_driver_by_id(1),
             "3": BussDriverCollection().get_driver_by_id(2),
             "4": BussDriverCollection().get_driver_by_id(3),
@@ -192,8 +208,11 @@ BussChaffisar
             action = self.choices.get(choice)
             if action:
                 print(f"""Choice of driver: {Bussdriver.printname(action)}""")
+                return action
             else:
                 print("is not an option".format(choice))
+
+
 class Menu:
     def __init__(self):
         self.choices = {
@@ -250,12 +269,11 @@ class Timetable:
         else:
             print("Invalid, skithög")
 
-
+    def add_timetableinfo(self):
+        # []
+        pass
 def main():
-    Menu().run()
-    drivers = BussDriverCollection()
-    print(drivers.get_driver_by_id(2))
-    drivers.get_driver_by_id(2)
+    pass
 
 if __name__ == "__main__":
-    main()
+    Menu().run()
