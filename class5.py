@@ -3,7 +3,6 @@ class Personal:
     def __init__(self, first, last):
         self.first = first
         self.last = last
-
         # Hämtar busschaufförer från ett txt dokument och pekar på rätt rad i txt dokumentet.
 
 
@@ -38,19 +37,31 @@ class Bussdriver(Personal):
 
         # Gör en OK-check till Felrapporteringen
     def report_on_site(self, report):
-        if report == "OK":
-            return "Driver is on site"
+        report = input("Confirm on time 1\n Not on time: hit any key:")
+        if report == "1":
+            print(self, "is on site.")
+            Bussdriver.report_buss_condition(self, report)
         else:
-            return "Driver is not on site"
+            print(self, "Driver is not on site")
 
         # Rapporterar vilket skick bussen är i.
-    def report_buss_condition(self, status):
+    def report_buss_condition(self, report):
+        status = input("Confirm if buss needs any shit done?""\n"
+                       "1. Need a cleaner?""\n"
+                       "2. Need a mechanic?""\n"
+                       "3. Buss in mintcondition")
+
         if status == "1":
-            return "Buss needs cleaner"
+            print("Buss needs a cleaner")
+           # Cleaner()
         elif status == "2":
-            return "Buss needs mechanic"
+            print("Buss needs mechanic")
+            # Mechanic()
+        elif status == "3":
+            print("Buss in mintcondition")
+            #TrafficMenu(self, status, report)
         else:
-            return "Buss in mintcondition"
+            print("wrong values")
 
         # Rapporterar tidspåslag
     def report_accident(self, type, time, driver):
@@ -142,7 +153,6 @@ BussLinjer
             action = self.choices.get(choice)
             if action:
                 print("Vald rutt:", action)
-
             else:
                 print("is not an option".format(choice))
 
@@ -152,9 +162,9 @@ class TrafficMenu:
         self.choices = {
 
             "2": BussDriverCollection().get_driver_by_id(1),
-                    "3": BussDriverCollection().get_driver_by_id(2),
-                    "4": BussDriverCollection().get_driver_by_id(3),
-                    "5": BussDriverCollection().get_driver_by_id(4)
+                    "3": ,
+                    "4": ,
+                    "5": 
                 }
 
             def display_driver(self):
@@ -184,7 +194,7 @@ Trafikcentral menyn
 class Drivermenu:
     def __init__(self):
         self.choices = {
-
+            "1": BussDriverCollection().get_driver_by_id(0),
             "2": BussDriverCollection().get_driver_by_id(1),
             "3": BussDriverCollection().get_driver_by_id(2),
             "4": BussDriverCollection().get_driver_by_id(3),
@@ -208,7 +218,9 @@ BussChaffisar
             action = self.choices.get(choice)
             if action:
                 print(f"""Choice of driver: {Bussdriver.printname(action)}""")
-                return action
+                driver1 = Bussdriver.printname(action)
+                print(driver1)
+                Bussdriver.report_on_site(driver1, report=None)
             else:
                 print("is not an option".format(choice))
 
@@ -272,8 +284,9 @@ class Timetable:
     def add_timetableinfo(self):
         # []
         pass
-def main():
-    pass
 
-if __name__ == "__main__":
+
+def main():
     Menu().run()
+if __name__ == "__main__":
+    main()
