@@ -6,4 +6,7 @@ class Person:
     def __init__(self, first, last):
         self.first = first
         self.last = last
-        # Hämtar busschaufförer från ett txt dokument och pekar på rätt rad i txt dokumentet.
+
+        # Printar ut Personens namn
+    def printname(self):
+        return f"{self.first} {self.last}"

@@ -1,24 +1,22 @@
 #  Vår Profession klass samling ärver även importer från basklass Person
 from human.Person import *
 
+DRIVER = "driver"
+MECHANIC = "mechanic"
+CLEANER = "cleaner"
+
 
 class Bussdriver(Person):
-
     def __init__(self, first, last, report=None):
         super().__init__(first, last)
         self.report = report
-        driver1 = Bussdriver.printname(self)
-
+        self.printname()
 
     def __str__(self):
         return f"{self.first}, {self.last}"
 
-        # Printar ut Bussförarensnamn
-    def printname(self):
-        return f"{self.first} {self.last}"
-
         # Gör en OK-check till Felrapporteringen
-    def report_on_site(self, driver1, report):
+    def report_on_site(self, driver1, report=None):
         report = input("Confirm on time""\n""Not on time: hit any key:")
         if report == "1":
             report = "on site"

@@ -1,25 +1,5 @@
-from human.Profession import *
-
-class BussDriverCollection:
-    def __init__(self):
-        with open("busschaffis.txt", "r") as f:
-
-            obs = f.readlines()
-            self.drivers = []
-
-            for d in obs:
-                first, last = d.split()
-                driver = Bussdriver(first, last)
-                self.drivers.append(driver)
-
-    def get_driver_by_id(self, id):
-            return self.drivers[id]
-
-
-        #Skapar Busschaufför utifrån Individen som är skapad.
-#########################################################################################
-
-
+from human.StaffManager import StaffManager
+from buss.BussLineMenu import BussLineMenu
 
 class TrafficMenu:
     def __init__(self):
@@ -50,46 +30,15 @@ Trafikcentral menyn
                 print("is not an option".format(choice))
 
 
-class Drivermenu:
-    def __init__(self):
-        self.choices = {
-            "1": BussDriverCollection().get_driver_by_id(0),
-            "2": BussDriverCollection().get_driver_by_id(1),
-            "3": BussDriverCollection().get_driver_by_id(2),
-            "4": BussDriverCollection().get_driver_by_id(3),
-            "5": BussDriverCollection().get_driver_by_id(4)
-        }
-    def display_driver(self):
-        print(f"""
-BussChaffisar
-************************
-1.{BussDriverCollection().get_driver_by_id(0)}
-2.{BussDriverCollection().get_driver_by_id(1)}
-3.{BussDriverCollection().get_driver_by_id(2)}
-4.{BussDriverCollection().get_driver_by_id(3)}
-5.{BussDriverCollection().get_driver_by_id(4)}
-""")
-
-    def run(self):
-        while True:
-            self.display_driver()
-            choice = input("Enter an option: ")
-            action = self.choices.get(choice)
-            if action:
-                print(f"""Choice of driver: {Bussdriver.printname(action)}""")
-                driver1 = Bussdriver.printname(action)
-                print(driver1)
-                Bussdriver.report_on_site(self, driver1, report=None)
-            else:
-                print("is not an option".format(choice))
-
-
 class Menu:
     def __init__(self):
         self.choices = {
             "1": self.company,
             "2": self.consumer,
         }
+
+        self.staffManager = StaffManager()
+#        self.bussLineMenu = BussLineMenu()
 
     def display_menu(self):
         print("""
@@ -111,9 +60,9 @@ class Menu:
     def company(self):
         password = input("Please insert password")
         if password == "dog":
-            Drivermenu().run()
+            self.staffManager.run()
         else:
             print("Wrong password")
 
     def consumer(self):
-        BussLineMenu().run()
+        self.bussLineMenu.run()
