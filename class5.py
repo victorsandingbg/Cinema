@@ -29,7 +29,7 @@ class Bussdriver(Personal):
         super().__init__(first, last)
         self.report = report
         driver1 = Bussdriver.printname(self)
-        print(driver1)
+
 
     def __str__(self):
         return f"{self.first}, {self.last}"
@@ -138,7 +138,7 @@ class Buss:
         linje = input("Choose one making you better feeling")
 
         if linje == "1":
-            linj = BussLinesCollection().get_bussline_by_id(0)
+            valdlinje = BussLinesCollection().get_bussline_by_id(0)
             print(f"""Välj avgång för busslinjen:""")
             print("*********************************")
             print(f"""1.{Timetable().get_timetable1_spec(0)}""")
@@ -149,23 +149,34 @@ class Buss:
             print(f"""6.{Timetable().get_timetable1_spec(5)}""")
             timetable1 = input("Choose specific departure:")
             if timetable1 == "1":
-                avg = Timetable().get_timetable1_spec(0)
+                valdavg = Timetable().get_timetable1_spec(0)
                 print(f"""{Timetable().get_timetable1_spec(0)}""")
-                Buss().samla_info(driver1, report, status, linj, avg)
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             elif timetable1 == "2":
+                valdavg = Timetable().get_timetable1_spec(1)
                 print(f"""{Timetable().get_timetable1_spec(1)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             elif timetable1 == "3":
+                valdavg = Timetable().get_timetable1_spec(2)
                 print(f"""{Timetable().get_timetable1_spec(2)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             elif timetable1 == "4":
+                valdavg = Timetable().get_timetable1_spec(3)
                 print(f"""{Timetable().get_timetable1_spec(3)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             elif timetable1 == "5":
+                valdavg = Timetable().get_timetable1_spec(4)
                 print(f"""{Timetable().get_timetable1_spec(4)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             elif timetable1 == "6":
+                valdavg = Timetable().get_timetable1_spec(5)
                 print(f"""{Timetable().get_timetable1_spec(5)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             else:
                 print("fuck u")
 
         elif linje == "2":
+            valdlinje = BussLinesCollection().get_bussline_by_id(1)
             print(f"""Välj avgång för busslinjen:""")
             print("*********************************")
             print(f"""1.{Timetable().get_timetable2_spec(0)}""")
@@ -174,23 +185,36 @@ class Buss:
             print(f"""4.{Timetable().get_timetable2_spec(3)}""")
             print(f"""5.{Timetable().get_timetable2_spec(4)}""")
             print(f"""6.{Timetable().get_timetable2_spec(5)}""")
-            timetable1 = input("Choose specific departure:")
-            if timetable1 == "1":
+            timetable2 = input("Choose specific departure:")
+            if timetable2 == "1":
+                valdavg = Timetable().get_timetable2_spec(0)
                 print(f"""{Timetable().get_timetable2_spec(0)}""")
-            elif timetable1 == "2":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable2 == "2":
+                valdavg = Timetable().get_timetable2_spec(1)
                 print(f"""{Timetable().get_timetable2_spec(1)}""")
-            elif timetable1 == "3":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable2 == "3":
+                valdavg = Timetable().get_timetable2_spec(2)
                 print(f"""{Timetable().get_timetable2_spec(2)}""")
-            elif timetable1 == "4":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable2 == "4":
+                valdavg = Timetable().get_timetable2_spec(3)
                 print(f"""{Timetable().get_timetable2_spec(3)}""")
-            elif timetable1 == "5":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable2 == "5":
+                valdavg = Timetable().get_timetable2_spec(4)
                 print(f"""{Timetable().get_timetable2_spec(4)}""")
-            elif timetable1 == "6":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable2 == "6":
+                valdavg = Timetable().get_timetable2_spec(5)
                 print(f"""{Timetable().get_timetable2_spec(5)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             else:
                 print("fuck u")
 
         elif linje == "3":
+            valdlinje = BussLinesCollection().get_bussline_by_id(2)
             print(f"""Välj avgång för busslinjen:""")
             print("*********************************")
             print(f"""1.{Timetable().get_timetable3_spec(0)}""")
@@ -199,19 +223,31 @@ class Buss:
             print(f"""4.{Timetable().get_timetable3_spec(3)}""")
             print(f"""5.{Timetable().get_timetable3_spec(4)}""")
             print(f"""6.{Timetable().get_timetable3_spec(5)}""")
-            timetable1 = input("Choose specific departure:")
-            if timetable1 == "1":
+            timetable3 = input("Choose specific departure:")
+            if timetable3 == "1":
+                valdavg = Timetable().get_timetable3_spec(0)
                 print(f"""{Timetable().get_timetable3_spec(0)}""")
-            elif timetable1 == "2":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable3 == "2":
+                valdavg = Timetable().get_timetable3_spec(1)
                 print(f"""{Timetable().get_timetable3_spec(1)}""")
-            elif timetable1 == "3":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable3 == "3":
+                valdavg = Timetable().get_timetable3_spec(2)
                 print(f"""{Timetable().get_timetable3_spec(2)}""")
-            elif timetable1 == "4":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable3 == "4":
+                valdavg = Timetable().get_timetable3_spec(3)
                 print(f"""{Timetable().get_timetable3_spec(3)}""")
-            elif timetable1 == "5":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable3 == "5":
+                valdavg = Timetable().get_timetable3_spec(4)
                 print(f"""{Timetable().get_timetable3_spec(4)}""")
-            elif timetable1 == "6":
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
+            elif timetable3 == "6":
+                valdavg = Timetable().get_timetable3_spec(5)
                 print(f"""{Timetable().get_timetable3_spec(5)}""")
+                Buss().samla_info(driver1, report, status, valdlinje, valdavg)
             else:
                 print("fuck u")
         else:
@@ -283,17 +319,6 @@ Trafikcentral menyn
                 print(f"""Choice of driver: {Bussdriver.printname(action)}""")
             else:
                 print("is not an option".format(choice))
-
-
-
-
-
-        #3 mint condition
-        #1 betyder on site.
-
-        TrafficMenu().run()
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
 
 class Drivermenu:
