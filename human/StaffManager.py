@@ -55,11 +55,11 @@ class StaffManager:
             print(f"""
     BussChaffisar
     ************************
-    1.{self.get_staff_by_id(DRIVER, 0).printname()}
-    2.{self.get_staff_by_id(DRIVER, 1).printname()}
-    3.{self.get_staff_by_id(DRIVER, 2).printname()}
-    4.{self.get_staff_by_id(DRIVER, 3).printname()}
-    5.{self.get_staff_by_id(DRIVER, 4).printname()}
+    1.{self.get_staff_by_id(DRIVER, 0).__str__()}
+    2.{self.get_staff_by_id(DRIVER, 1).__str__()}
+    3.{self.get_staff_by_id(DRIVER, 2).__str__()}
+    4.{self.get_staff_by_id(DRIVER, 3).__str__()}
+    5.{self.get_staff_by_id(DRIVER, 4).__str__()}
     """)
 
     def run(self):
@@ -68,9 +68,7 @@ class StaffManager:
             choice = input("Enter an option: ")
             driver = self.drivers[int(choice) - 1] # Man räknar alltid en array från 0
             if driver:
-                print(f"""Choice of driver: {driver.printname()}""")
-                driver1 = driver.printname()
-                print(driver1)
-                driver.report_on_site(self, driver1)
+                print(f"""Choice of driver: {driver.__str__()}""")
+                driver.report_on_site()
             else:
                 print("is not an option".format(choice))

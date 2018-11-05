@@ -9,4 +9,7 @@ class Person:
 
         # Printar ut Personens namn
     def printname(self):
+        print(self.__str__())
+
+    def __str__(self):
         return f"{self.first} {self.last}"
