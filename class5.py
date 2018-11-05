@@ -138,10 +138,18 @@ BussLinjer
     def run(self):
         while True:
             self.display_linjemenu()
-            choice = input("Enter an option: ")
-            action = self.choices.get(choice)
-            if action:
-                print("Vald rutt:", action)
+            choice = input("Välj linje för se tidtabell: ")
+            action = choice
+            if action == "1":
+                print("""\nGöteborg Centralstationen - Uddevalla Kampenhof\n** ** ** ** ** ** ** ** ** ** ** **""")
+                Timetable().get_timetable1()
+            elif action == "2":
+                print("""\nPartille Centrum - Nordstan\n** ** ** ** ** ** ** ** ** ** ** **""")
+                Timetable().get_timetable2()
+
+            elif action == "3":
+                print("""\nKungsbacka Station - Göteborg Centralstation\n** ** ** ** ** ** ** ** ** ** ** **""")
+                Timetable().get_timetable3()
 
             else:
                 print("is not an option".format(choice))
@@ -247,31 +255,67 @@ class Menu:
     def consumer(self):
         Linjemenu().run()
 
+class Get_time:
+    def __init__(self, avg, ank):
+        self.avg = avg
+        self.ank = ank
+
+    def __str__(self):
+        return f"Departure:{self.avg} Arrival:{self.ank}"
+
 class Timetable:
-    def __init__(self, timetable):
-        self.timetable = timetable
-        timetable = int(timetable)
+    def __init__(self):
+        with open("tables_linje541.txt", "r") as f:
 
-        if timetable == 1:
-            for line in open("tables_541.txt", "r"):
-                data = line.split(";")
-                print("Departure:", data[0],"Arrival:", data[1], end="")
+            obs = f.readlines()
+            self.table1 = []
 
-        elif timetable == 2:
-            for line in open("tables_121.txt", "r"):
-                data = line.split(";")
-                print("Departure:", data[0], "Arrival:", data[1], end="")
+            for d in obs:
+                avg, ank = d.split(";")
+                string = Get_time(avg, ank)
+                self.table1.append(string)
 
-        elif timetable == 3:
-            for line in open("tables_95.txt", "r"):
-                data = line.split(";")
-                print("Departure:", data[0], "Arrival:", data[1], end="")
-        else:
-            print("Invalid, skithög")
+        with open("tables_linje121.txt", "r") as f:
 
-    def add_timetableinfo(self):
-        # []
-        pass
+            obs = f.readlines()
+            self.table2 = []
+
+            for d in obs:
+                avg, ank = d.split(";")
+                string = Get_time(avg, ank)
+                self.table2.append(string)
+
+        with open("tables_linje95.txt", "r") as f:
+
+            obs = f.readlines()
+            self.table3 = []
+
+            for d in obs:
+                avg, ank = d.split(";")
+                string = Get_time(avg, ank)
+                self.table3.append(string)
+
+    def get_timetable1_spec(self, id):
+        return self.table1[id]
+
+    def get_timetable2_spec(self, id):
+        return self.table2[id]
+
+    def get_timetable3_spec(self, id):
+        return self.table3[id]
+
+    def get_timetable1(self):
+        for all in self.table1:
+            print(all)
+
+    def get_timetable2(self):
+        for all in self.table2:
+            print(all)
+
+    def get_timetable3(self):
+        for all in self.table3:
+            print(all)
+
 def main():
     pass
 
