@@ -1,9 +1,4 @@
-        # Skapar Individen
-class Personal:
-    def __init__(self, first, last):
-        self.first = first
-        self.last = last
-        # Hämtar busschaufförer från ett txt dokument och pekar på rätt rad i txt dokumentet.
+from human.Personal import *
 
 
 class BussDriverCollection:
@@ -22,83 +17,47 @@ class BussDriverCollection:
             return self.drivers[id]
 
 
-        #Skapar Busschaufför utifrån Individen som är skapad.
-class Bussdriver(Personal):
+class Report:
+    def __init__(self):
+        pass
 
-    def __init__(self, first, last, report=None):
-        super().__init__(first, last)
-        self.report = report
-        driver1 = Bussdriver.printname(self)
-
-    def __str__(self):
-        return f"{self.first}, {self.last}"
-
-        # Printar ut Bussförarensnamn
-    def printname(self):
-        return f"{self.first} {self.last}"
-
-        # Gör en OK-check till Felrapporteringen
-    def report_on_site(self, driver1, report):
+    def report_on_site(self, driver1):
         report = input("Confirm on time""\n""Not on time: hit any key:")
         if report == "1":
             report = "on site"
             print(driver1, "is on site.""\n")
-            Bussdriver.report_buss_condition(self,driver1, report)
+            Report.report_buss_condition(self, driver1, report)
         else:
             report = "not on site"
             print(driver1, ": Driver is not on site""\n")
-            Bussdriver.report_buss_condition(self, driver1, report)
+            Report.report_buss_condition(self, driver1, report)
         # Rapporterar vilket skick bussen är i.
 
     def report_buss_condition(self, driver1, report):
         status = input("Confirm if buss needs any shit done?""\n"
                        "1. Buss in mintcondition""\n"
-                       "2. Need a mechanic?""\n"
-                       "3. Need a cleaner?")
+                       "2. Need a Mechanic?""\n"
+                       "3. Need a Cleaner?")
         if status == "1":
             status = "mint condition"
             print("Buss in mintcondition")
             Buss().Traffic_addstuff(driver1, report, status)
         elif status == "2":
-
             status = "Need a mechanic"
-            mechanic1 = Mechanic("Bosse", "Bussdoktor")
-            Mechanic.call_mechanic(mechanic1, driver1, report, status)
+            Mechanic("Ringaren","iNottredam").call_mechanic(driver1, report, status)
         elif status == "3":
             status = "Need a cleaner"
-            cleaner1 = Cleaner("Ringaren", "iNotreDame")
-            Cleaner.call_cleaner(cleaner1, driver1, report, status)
+            Cleaner().call_cleaner(driver1, report, status)
         else:
             print("wrong values")
 
         # Rapporterar tidspåslag
-    def report_accident(self, type, time, driver):
-        self.type_of_accident = type
-        self.time = int(time)
-        time = time + 2
-
-        return type, time, driver
-
-
-class Mechanic(Personal):
-    def __init__(self, first, last):
-        super().__init__(first, last)
-
-    def call_mechanic(self, driver1, report, status):
-        print(driver1, report, status)
-        print(driver1, """called for a Mechanic!""""\n")
-        Buss().Traffic_addstuff(driver1, report, status)
-
-
-class Cleaner(Personal):
-    def __init__(self, first, last):
-        super().__init__(first, last)
-
-    def call_cleaner(self, driver1, report, status):
-        print(driver1, report, status)
-        print(driver1,"""called for a Cleaner!""""\n")
-        Buss().Traffic_addstuff(driver1, report, status)
-#########################################################################################
+    def report_accident(self, valdavg):
+        print(valdavg)
+        rtype = input("Ange varför det är försenat: ")
+        time = input("Ange hur länge förseningen är:")
+        newtime = valdavg.avg +" - " + valdavg.ank +" + " + time
+        print(f"""Försenat pga {rtype}: Avångstid {newtime} min""")
 
 
 class BussLinesCollection:
@@ -125,11 +84,11 @@ class Buss:
         self.valdavglist = []
 
     def samla_info(self, driver1, report, status, valdlinje, valdavg):
-        alltlist = []
-        alltlist.append(valdavg.avg + valdavg.ank + driver1 + report + status + valdlinje)
-        print(alltlist)
-        TrafficMenu().run(alltlist)
-
+      #  allt_list = []
+       # allt_list.append(valdavg.avg + valdavg.ank + driver1 + report + status + valdlinje)
+        #print(alltlist)
+        print(driver1, report, status, valdlinje, valdavg)
+        TrafficMenu().run()
 
     def Traffic_addstuff(self, driver1, report, status):
         print("Välj vilken linje du sitter på?")
@@ -297,28 +256,41 @@ Busslinjer
 class TrafficMenu:
     def __init__(self):
         self.choices = {
-            "1": BussDriverCollection().get_driver_by_id(1),
-            "2": BussDriverCollection().get_driver_by_id(1),
+            "1": self.send_accident(),
+            "2": self.send_idontknow(),
+            "3": self.send_cleaner(),
 
                 }
+
+    def send_accident(self):
+        # Report().report_accident()
+        pass
+
+    def send_idontknow(self):
+        # Report().show_late_arrivals()
+        pass
+
+    def send_cleaner(self):
+        # Report().show_damage_buss()
+        pass
 
     def display_traffic(self):
         print(f"""
 Trafikcentral menyn
 ************************
-1. Timetable
-2. Bussstatus
-3. 
-5.
+1. Rapportera försening
+2. Se pågående förseningar.
+3. Bussåtgärder/Bussar som behöver cleaning
+5. 
         """)
 
-    def run(self, alltlist):
+    def run(self):
         while True:
             self.display_traffic()
             choice = input("Enter an option: ")
             action = self.choices.get(choice)
             if action:
-                print(f"""Choice of driver: {Bussdriver.printname(action)}""")
+                action()
             else:
                 print("is not an option".format(choice))
 
@@ -352,7 +324,7 @@ BussChaffisar
                 print(f"""Choice of driver: {Bussdriver.printname(action)}""")
                 driver1 = Bussdriver.printname(action)
                 print(driver1)
-                Bussdriver(self, self).report_on_site(driver1, report=None)
+                Report().report_on_site(driver1)
             else:
                 print("is not an option".format(choice))
 
