@@ -30,7 +30,6 @@ class Bussdriver(Personal):
         self.report = report
         driver1 = Bussdriver.printname(self)
 
-
     def __str__(self):
         return f"{self.first}, {self.last}"
 
@@ -85,18 +84,15 @@ class Mechanic(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
 
-
     def call_mechanic(self, driver1, report, status):
         print(driver1, report, status)
-        print(driver1,"""called for a Mechanic!""""\n")
+        print(driver1, """called for a Mechanic!""""\n")
         Buss().Traffic_addstuff(driver1, report, status)
 
 
 class Cleaner(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
-
-
 
     def call_cleaner(self, driver1, report, status):
         print(driver1, report, status)
@@ -126,11 +122,14 @@ class BussLinesCollection:
 
 class Buss:
     def __init__(self):
-        pass
+        self.valdavglist = []
 
-    def samla_info(self, driver1, report, status, linje, avg):
-        print(driver1, report, status, linje, avg)
-        c=input("d")
+    def samla_info(self, driver1, report, status, valdlinje, valdavg):
+        alltlist = []
+        alltlist.append(valdavg.avg + valdavg.ank + driver1 + report + status + valdlinje)
+        print(alltlist)
+        TrafficMenu().run(alltlist)
+
 
     def Traffic_addstuff(self, driver1, report, status):
         print("Välj vilken linje du sitter på?")
@@ -313,7 +312,7 @@ Trafikcentral menyn
 5.
         """)
 
-    def run(self):
+    def run(self, alltlist):
         while True:
             self.display_traffic()
             choice = input("Enter an option: ")
@@ -353,7 +352,7 @@ BussChaffisar
                 print(f"""Choice of driver: {Bussdriver.printname(action)}""")
                 driver1 = Bussdriver.printname(action)
                 print(driver1)
-                Bussdriver.report_on_site(self, driver1, report=None)
+                Bussdriver(self, self).report_on_site(driver1, report=None)
             else:
                 print("is not an option".format(choice))
 
@@ -392,13 +391,15 @@ class Menu:
     def consumer(self):
         Linjemenu().run()
 
+
 class Get_time:
     def __init__(self, avg, ank):
         self.avg = avg
         self.ank = ank
 
     def __str__(self):
-        return f"Departure:{self.avg} Arrival:{self.ank}"
+        return f"{self.avg},{self.ank}"
+
 
 class Timetable:
     def __init__(self):
@@ -456,5 +457,7 @@ class Timetable:
 
 def main():
     Menu().run()
+
+
 if __name__ == "__main__":
     main()
