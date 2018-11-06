@@ -61,13 +61,14 @@ class Bussdriver(Personal):
             print("Buss in mintcondition")
             Buss().Traffic_addstuff(driver1, report, status)
         elif status == "2":
+
             status = "Need a mechanic"
-            print("Buss needs mechanic")
-            Mechanic.call_mechanic(self, driver1, report, status)
+            mechanic1 = Mechanic("Bosse", "Bussdoktor")
+            Mechanic.call_mechanic(mechanic1, driver1, report, status)
         elif status == "3":
             status = "Need a cleaner"
-            print("Buss needs a cleaner")
-            Cleaner.call_cleaner(self, driver1, report, status)
+            cleaner1 = Cleaner("Ringaren", "iNotreDame")
+            Cleaner.call_cleaner(cleaner1, driver1, report, status)
         else:
             print("wrong values")
 
@@ -84,9 +85,10 @@ class Mechanic(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
 
+
     def call_mechanic(self, driver1, report, status):
         print(driver1, report, status)
-        print(f"""{driver1}, called for a Mechanic!""""\n")
+        print(driver1,"""called for a Mechanic!""""\n")
         Buss().Traffic_addstuff(driver1, report, status)
 
 
@@ -94,9 +96,11 @@ class Cleaner(Personal):
     def __init__(self, first, last):
         super().__init__(first, last)
 
+
+
     def call_cleaner(self, driver1, report, status):
         print(driver1, report, status)
-        print(f"""{self}, called for a Cleaner!""""\n")
+        print(driver1,"""called for a Cleaner!""""\n")
         Buss().Traffic_addstuff(driver1, report, status)
 #########################################################################################
 
