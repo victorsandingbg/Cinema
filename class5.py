@@ -18,7 +18,7 @@ Trafikcentral menyn
 5.
         """)
 
-    def run(self):
+    def run(self, alltlist):
         while True:
             self.display_traffic()
             choice = input("Enter an option: ")
