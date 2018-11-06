@@ -44,7 +44,7 @@ class Bussdriver(Personal):
         if report == "1":
             report = "on site"
             print(driver1, "is on site.""\n")
-            Bussdriver.report_buss_condition(self, driver1, report)
+            Bussdriver.report_buss_condition(self,driver1, report)
         else:
             report = "not on site"
             print(driver1, ": Driver is not on site""\n")
@@ -53,22 +53,21 @@ class Bussdriver(Personal):
 
     def report_buss_condition(self, driver1, report):
         status = input("Confirm if buss needs any shit done?""\n"
-                       "1. Need a cleaner?""\n"
+                       "1. Buss in mintcondition""\n"
                        "2. Need a mechanic?""\n"
-                       "3. Buss in mintcondition")
+                       "3. Need a cleaner?")
         if status == "1":
-            status = "Need a cleaner"
-            print("Buss needs a cleaner")
-            Cleaner.call_cleaner(self, driver1, report, status)
-            TrafficMenu().run()
+            status = "mint condition"
+            print("Buss in mintcondition")
+            Buss().Traffic_addstuff(driver1, report, status)
         elif status == "2":
             status = "Need a mechanic"
             print("Buss needs mechanic")
             Mechanic.call_mechanic(self, driver1, report, status)
         elif status == "3":
-            status = "mint condition"
-            print("Buss in mintcondition")
-            Buss().Traffic_addstuff(self, driver1, report, status)
+            status = "Need a cleaner"
+            print("Buss needs a cleaner")
+            Cleaner.call_cleaner(self, driver1, report, status)
         else:
             print("wrong values")
 
