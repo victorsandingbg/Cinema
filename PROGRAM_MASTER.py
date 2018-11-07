@@ -1,6 +1,6 @@
 from human.StaffManager import StaffManager
 from buss.BussLineMenu import BussLineMenu
-
+from report.ReportManager import ReportManager
 
 class Menu:
     def __init__(self):
@@ -47,6 +47,13 @@ class Menu:
 def main():
     menu = Menu()
     menu.run()
+
+    #####
+    # Detta är endast ett manuellt test för att se så att
+    # Vi får rätt rapporter in i ReortManager
+    # reportManager = ReportManager()
+    # reportManager.test_report()
+    #####
 
 
 if __name__ == '__main__':
