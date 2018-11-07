@@ -45,12 +45,15 @@ class Menu:
 
 
 def main():
-    reportManager = ReportManager()
-    reportManager.test_Report()
+    menu = Menu()
+    menu.run()
 
-
-    #menu = Menu()
-    #menu.run()
+    #####
+    # Detta är endast ett manuellt test för att se så att
+    # Vi får rätt rapporter in i ReortManager
+    # reportManager = ReportManager()
+    # reportManager.test_report()
+    #####
 
 
 if __name__ == '__main__':
