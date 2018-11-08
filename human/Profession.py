@@ -25,8 +25,8 @@ class Bussdriver(Person):
         # Rapporterar vilket skick bussen är i.
 
 
-    # Denna måste göras om?? En städare kan inte ringa till sig själv när hon
-    # ska städa en buss åt någon annan...
+    # Denna måste göras om?? En städare kan inte ringa till sig själv när hon ska städa
+    # en buss åt någon annan...
     def report_buss_condition(self, report):
         status = input("Confirm if buss needs any shit done?""\n"
                        "1. Need a cleaner?""\n"

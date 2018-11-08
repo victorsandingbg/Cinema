@@ -1,9 +1,3 @@
-## Denna behöver göras om då bussens enda uppgift är att ta
-## Resenärer från punkt A -> B -> C
-## En resenär ska inte behöva hålla koll på vilken linje hon
-## sitter på då det är Linjen som styr vilken buss som ska köras
-## En buss har ett nummer och en resväg som den ska ta. Samt att
-## den har X antal platser för resenärer.
 class Buss:
     def __init__(self):
         pass
